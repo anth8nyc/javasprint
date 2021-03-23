@@ -28,6 +28,8 @@ startBtnEl.addEventListener("click", function(){
   clearInterval(setTime);
   let secondsLeft = 10;
   setTime();
+  removeStartBtn();
+  renderQuestions();
   
   
   for (var i = 0; i < answerBtnEl.length; i++) {
@@ -45,7 +47,14 @@ startBtnEl.addEventListener("click", function(){
       }
     }, 1000);
   }
+
+  function removeStartBtn() {
+
+    startBtnEl.setAttribute("style", "display:none")
+  }
+
 });
+
 
 
 function endGame() {
