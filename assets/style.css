@@ -1,12 +1,16 @@
-* {
+*, *::before, *::after {
   box-sizing: border-box;
+  font-family: futura, Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --accent: crimson;
 }
 
 body {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: whitesmoke;
   margin: 0;
-  padding: 0%;
+  padding: 0;
 }
 
 
@@ -14,9 +18,7 @@ header {
   justify-content:space-between;
   display: flex;
   flex-wrap: wrap;
-  
 }
-
 
 header div.hss {
   color: crimson;
@@ -39,37 +41,44 @@ header div.timer {
   padding: 5px;
   border-style: outset;
   border-color: (rgb(118, 118, 118), rgb(133, 133, 133));
-
 }
 
 h1, h2 {
   text-align: center;
   margin: 40px auto;
   color: crimson;
+  font-style: italic;
+}
+
+.questContain h2 {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .questContain {
-  /* max-width: 680px; */
+  max-width: 86%;
   margin: 5% auto;
   display: none;
+  box-shadow: 0 4px 8px 0 crimson;
+  border-radius: 15px;
+  border-style: none;
+  padding: 10px;
 }
-
-
 
 .answerBtn {
   /* float: left; */
-  width: 48%;
+  width: 50%;
   /* height: 40px; */
+  /* min-height: 60px; */
   margin: auto;
   /* cursor: pointer; */
   /* object-fit: cover; */
   border-radius: 8px;
-  /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 1); */
   transition: 0.3s;
   justify-content: space-around;
   /* display: none; */
 }
-
 
 .answerBtn button {
   margin: 10px;
@@ -77,7 +86,10 @@ h1, h2 {
   border-radius: 15px;
   color: white;
   background-color: crimson;
-  padding: 5px;
+  padding: 10px;
+  min-height: 70px;
+  min-width: 100%;
+  
 }
 
 #startBtn {
@@ -94,10 +106,17 @@ h1, h2 {
   /* align-content: center; */
   color: white;
   background-color: crimson;
-
 }
 
 #startBtn p {
   margin: auto;
   font-size: xx-large;
+}
+
+button:hover {
+  opacity: .65;
+  border-style: solid;
+  border-radius: 45px;
+  border-color: black;
+  cursor: pointer;
 }
