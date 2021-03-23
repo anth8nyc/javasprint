@@ -22,6 +22,7 @@ let timerEl = document.querySelector(".timer");
 let mainEl = document.querySelector(".main");
 let questContainEl = document.querySelector(".questContain")
 let answerBtnEl = document.querySelector(".answerBtn")
+let questEl = document.querySelector(".question")
 
 startBtnEl.addEventListener("click", function(){
   
@@ -31,13 +32,13 @@ startBtnEl.addEventListener("click", function(){
   removeStartBtn();
   renderQuestions();
   
-  
   for (var i = 0; i < answerBtnEl.length; i++) {
     answerBtnEl[i].setAttribute("style", "display:flex");
   }
   
   function setTime() {
     var timerInterval = setInterval(function() {
+      timerEl.setAttribute("style", "display: flex")
       secondsLeft--;
       timerEl.textContent = secondsLeft + " seconds left";
       
@@ -49,12 +50,17 @@ startBtnEl.addEventListener("click", function(){
   }
 
   function removeStartBtn() {
-
     startBtnEl.setAttribute("style", "display:none")
   }
 
 });
 
+
+function renderQuestions(){
+
+  questContainEl.setAttribute("style", "display: flex")
+
+}
 
 
 function endGame() {

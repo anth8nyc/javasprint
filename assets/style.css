@@ -24,16 +24,21 @@ header div.hss {
   margin-top: 20px;
   display: flex;
   padding: 5px;
-  
+  border-style: outset;
+  border-radius: 15px;
+  padding: 5px;
 }
+
 header div.timer {
   margin-top: 20px;
   margin-right: 20px;
   background-color: crimson;
   color: white;
-  display: flex;
+  display: none;
   border-radius: 15px;
   padding: 5px;
+  border-style: outset;
+  border-color: (rgb(118, 118, 118), rgb(133, 133, 133));
 
 }
 
@@ -43,11 +48,12 @@ h1, h2 {
   color: crimson;
 }
 
-.questioncontain {
-  max-width: 680px;
-  margin: 100px auto;
-  display: flex;
+.questContain {
+  /* max-width: 680px; */
+  margin: 5% auto;
+  display: none;
 }
+
 
 
 .answerBtn {
@@ -61,6 +67,7 @@ h1, h2 {
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 1); */
   transition: 0.3s;
   justify-content: space-around;
+  /* display: none; */
 }
 
 
@@ -71,25 +78,26 @@ h1, h2 {
   color: white;
   background-color: crimson;
   padding: 5px;
-
 }
-
 
 #startBtn {
   display: flex;
   /* float: left; */
   width: fit-content;
-  /* height: 40px; */
-  margin: 1% auto;
+  height: fit-content;
+  margin: 10% auto;
   /* cursor: pointer; */
   /* object-fit: cover; */
   border-radius: 8px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 1); */
   transition: 0.3s;
   /* align-content: center; */
-  
+  color: white;
+  background-color: crimson;
+
 }
 
 #startBtn p {
   margin: auto;
+  font-size: xx-large;
 }
