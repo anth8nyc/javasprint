@@ -20,18 +20,20 @@ header {
   flex-wrap: wrap;
 }
 
-header div.hss {
+header button.hss {
   color: crimson;
   margin-left: 20px;
   margin-top: 20px;
   display: flex;
   padding: 5px;
-  border-style: outset;
+  /* border-style: outset; */
   border-radius: 15px;
   padding: 5px;
+  font-size: 16px;
 }
 
-header div.timer {
+header button.timer {
+  font-size: 16px;
   margin-top: 20px;
   margin-right: 20px;
   background-color: crimson;
@@ -39,8 +41,7 @@ header div.timer {
   display: none;
   border-radius: 15px;
   padding: 5px;
-  border-style: outset;
-  border-color: (rgb(118, 118, 118), rgb(133, 133, 133));
+  /* border-style: outset; */
 }
 
 h1, h2 {
@@ -100,7 +101,7 @@ h1, h2 {
   margin: 10% auto;
   /* cursor: pointer; */
   /* object-fit: cover; */
-  border-radius: 8px;
+  border-radius: 15px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 1); */
   transition: 0.3s;
   /* align-content: center; */
