@@ -1,12 +1,12 @@
-// // Create Start Button function
-// Begin Timer function
-// Replicate function with rules explanation or build into previous function
- 
 let startBtnEl = document.querySelector(".startBtn");
+let instructEl = document.querySelector("#instructions");
 let timeBtnEl = document.querySelector(".time");
+let HighSBtnEl = document.querySelector(".hss");
 let timerEl = document.querySelector(".timer");
 let mainEl = document.querySelector(".main");
 
+let finalScoreEl = document.querySelector(".finalScore")
+let endScreenEl = document.querySelector(".endScreen")
 let questContainEl = document.querySelector(".questContain")
 let questEl = document.querySelector(".question")
 
@@ -16,87 +16,96 @@ let answerBtnBEl = document.querySelector("#answerchoiceb")
 let answerBtnCEl = document.querySelector("#answerchoicec")
 let answerBtnDEl = document.querySelector("#answerchoiced")
 
-let secondsLeft = 75;
+let secondsLeft = 100;
 let score = 0;
 let currentQuest = 0;
 
 let questions = [
   
   {
-    question: "What's my favorite color?", 
+    question: "Which HTML element do we insert JavaScript into?", 
     answers:[
-      { text: "Red", correct: true},
-      { text: "Yellow", correct: false},
-      { text: "Blue", correct: false},
-      { text: "Green", correct: false},
+      { text: "<javascript>", correct: false},
+      { text: "<js>", correct: false},
+      { text: "<script>", correct: true},
+      { text: "<link>", correct: false},
     ]},
   {
-    question: "What's my favorite number?", 
+    question: "Where is best to insert a JavaScript?", 
     answers:[
-      { text: "8", correct: false},
-      { text: "21", correct: false},
-      { text: "4", correct: true},
-      { text: "0", correct: false},
+      { text: "The end of the <body> section", correct: true},
+      { text: "The end of the <head> section", correct: false},
+      { text: "Within the <html> tag ", correct: false},
+      { text: "None of the above", correct: false},
     ]},
   {
-    question: "What's my favorite food?", 
+    question: "How do you comment in JavaScript?", 
     answers:[
-      { text: "Tacos", correct: false},
-      { text: "Hot Dogs", correct: false},
-      { text: "Pizza", correct: true},
-      { text: "Burgers", correct: false},
+      { text: "<!-- comment -->", correct: false},
+      { text: "// comment", correct: true},
+      { text: "/* comment */ ", correct: false},
+      { text: "// comment //", correct: false},
     ]},
   {
-    question: "What's my favorite animal?", 
+    question: "boolean(4>2) will return:", 
     answers:[
-      { text: "Lion", correct: false},
-      { text: "Eagle", correct: false},
-      { text: "Snake", correct: false},
-      { text: "Fox", correct: true},
+      { text: "2", correct: false},
+      { text: "false", correct: false},
+      { text: "true", correct: true},
+      { text: "NaN", correct: false},
     ]},
   {
-    question: "What's my favorite TV show?", 
+    question: "Is JavaScript case-sensitive?", 
     answers:[
-      { text: "Game Of Thrones", correct: false},
-      { text: "Midnight Gospel", correct: true},
-      { text: "Black Mirror", correct: false},
-      { text: "Bob's Burgers", correct: false},
+      { text: "no", correct: false},
+      { text: "No", correct: false},
+      { text: "Yes", correct: true},
+      { text: "yes", correct: true},
+    ]},
+  {
+    question: "JavaScript is a _____ programming language.", 
+    answers:[
+      { text: "Client-side", correct: false},
+      { text: "Server-side", correct: false},
+      { text: "All of the above", correct: true},
+      { text: "None of the above", correct: false},
     ]},
   
 ]
 
+setTime();
+
 startBtnEl.addEventListener("click", function(){
-  
-  clearInterval(setTime);
-  setTime();
+  secondsLeft = 71;
   removeStartBtn();
+  timeBtnEl.setAttribute("style", "display: flex")
   startGame();
-  
 });
 
 function startGame() {
-
   questContainEl.setAttribute("style", "display: flex");
-  
   renderQuestions();
-     
 }
 
-
 function setTime() {
-  timeBtnEl.setAttribute("style", "display: flex")
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timerEl.textContent = secondsLeft + " seconds left";
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval);
+  let timerInterval = setInterval(function() {
+    if(secondsLeft > 0){
+      secondsLeft--;
+    } else {
       endGame();
     }
+    timerEl.textContent = secondsLeft + " seconds left";
   }, 1000);
+  if(secondsLeft <= 0) {
+    clearInterval(timerInterval);
+    endGame();
+    return;
+  }
 } 
 
 function removeStartBtn() {
   startBtnEl.setAttribute("style", "display:none")
+  instructEl.setAttribute("style", "display:none")
 }
 
 function renderQuestions(){
@@ -107,95 +116,148 @@ function renderQuestions(){
   answerBtnCEl.textContent = questions[currentQuest].answers[2].text
   answerBtnDEl.textContent = questions[currentQuest].answers[3].text
 
+  if ((secondsLeft<= 0)) {
+    endGame();
+  } else {
+  }
   for (let i = 0; i < answerBtnsEl.length; i++) {
     
     let ac = questions[currentQuest].answers[i].correct;
-    
     if(ac === true){
       answerBtnsEl[i].classList.add("correct")
     }
-    
   }
-  
-  for (let i = 0; i < answerBtnsEl.length; i++) {
-    
-    answerBtnsEl[i].addEventListener("click", function(chose){
-      let chosenA = chose.target;
-      checkValidity(chosenA);
-      
-    })    
-    
-  }
-  
-  currentQuest++;
-  renderQuestions;
+
+  answerBtnAEl.addEventListener("click", checkValidity)
+  answerBtnBEl.addEventListener("click", checkValidity)
+  answerBtnCEl.addEventListener("click", checkValidity)
+  answerBtnDEl.addEventListener("click", checkValidity)
 };
 
+function checkValidity(chose){
 
-function checkValidity(chosenA){
-  
-  chosenA
+  let chosenA = chose.target;
   if (chosenA.classList.contains("correct")){
-    addScore();
-  } else {
-    subTime();
+    score++;
+  } else {   
+    secondsLeft = secondsLeft - 10;
   };
+
   resetQA();
-  renderQuestions();
+  currentQuest++;
+  if (currentQuest < questions.length){
+    renderQuestions();
+  } else{
+    secondsLeft = 0;
+    endGame();
+  }
   
-  console.log(chosenA);
-  console.log(score)
 };
 
 function resetQA() {
   
-  for (let i = 0; i < answerBtnsEl.length; i++) {
-    
-    answerBtnsEl[i].classList.remove("correct")    
-    
+  if(answerBtnAEl.classList.contains("correct")){
+    answerBtnAEl.classList.remove("correct")    
+  }  
+  if(answerBtnBEl.classList.contains("correct")){
+    answerBtnBEl.classList.remove("correct")    
+  } 
+  if(answerBtnCEl.classList.contains("correct")){
+    answerBtnCEl.classList.remove("correct")    
+  }  
+  if (answerBtnDEl.classList.contains("correct")){
+    answerBtnDEl.classList.remove("correct")    
+  }  
+  return
+}
+
+
+  
+function endGame() {
+  questContainEl.setAttribute("style", "display: none")
+  endScreenEl.setAttribute("style", "display: flex")
+
+  finalScoreEl.textContent = "Final score: " + score;
+}
+
+HighSBtnEl.addEventListener("click", function(event) {
+  event.preventDefault();
+  secondsLeft = 0
+  removeStartBtn();
+  endGame();
+})
+
+let userInput = document.querySelector("#initialsText");
+let highscorelog = document.querySelector("#highscorelog");
+let highscoreList = document.querySelector("#highscorelist");
+let clearHSBtnEl = document.querySelector(".clearHighScores");
+let saveHSBtnEl = document.querySelector(".saveHighScores");
+let playAgainBtnEl = document.querySelector(".playAgain");
+
+let highscores = [];
+
+function renderHighScores() {
+  highscoreList.innerHTML = "";
+
+  for (var i = 0; i < highscores.length; i++) {
+    var highscore = highscores[i];
+
+    var li = document.createElement("li");
+    li.textContent = highscore.userText + " --- " + highscore.userScore;
+    highscoreList.appendChild(li);
   }
 }
 
-function sTime() {
-  
-  secondsLeft--;
+function storeHighscores() {
+  localStorage.setItem("highscores", JSON.stringify(highscores));
 }
 
-function addScore() {
-  score++;
-}
-function subTime() {
-  secondsLeft - 10;
-}
-// for (let index = 0; index < array.length; index++) {
-  //   const element = array[index];
+saveHSBtnEl.addEventListener("click", function(event) {
+  event.preventDefault();
   
-  // }
+  let userText = userInput.value.trim();
+  let userScore = score;
   
-  // For loop //
-  // on click, check correct t/f 
-  //if else 
-    // either renders next question
-    // if correct add to score
-    // else subtract time
+  if (userText === "") {
+    return;
+  }
+  
+  highscores.push({userText, userScore});
+  userInput.value = "";
+  
+  storeHighscores();
+  renderHighScores();
+});
+
+clearHSBtnEl.addEventListener("click", function(event){
+  event.preventDefault();
+  highscores = [];
+  
+  renderHighScores();
+  
+});
+
+playAgainBtnEl.addEventListener("click", function(event){
+  event.preventDefault();
+  
+  storeHighscores();
+  secondsLeft = 100
+  currentQuest = 0;
+  score = 0;
+  endScreenEl.setAttribute("style", "display: none")  
+  timeBtnEl.setAttribute("style", "display: none")  
+  startBtnEl.setAttribute("style", "display:flex")
+  
+});
+  
+function init() {
+  let storedHighscores = JSON.parse(localStorage.getItem("highscores"));
+  
+  if (storedHighscores !== null) {
+    highscores = storedHighscores;
+  }
+  
+  renderHighScores();
+}
     
-    // currentQuest++;    
-    // renderQuestions();  
-
-  
-
-function endGame() {
-
-
-}
-
-
-// Begin Quiz function 
-
-    // Each question should track the correct answer choice to the score 
-    // and subtract time from the timer for incorrect answers
-
-// Push score number to large display when timer hits zero to display page 
-// include form in display page for initials input
-
-// use local storage to take information for display page to log high score
+init();

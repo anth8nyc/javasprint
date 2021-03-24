@@ -20,6 +20,7 @@
             <button class="startBtn">
                 <p>Start</p>
             </button>
+            <p class="startBtn" id="instructions">You will have 70 seconds to answer 6 questions about JavaScript.</br>Each correct answer earns 1 point, and each incorrect</br>answer subtracts 10 seconds from your timer. Good luck!</br> Click Start to begin -- Click Highscores to view</p>
                 
             <div class="questContain">
         
@@ -33,11 +34,20 @@
             </div>
             <div class="endScreen">
                 <h2 class="finalScore"></h2>
-
+                <div class="HSCon">
+                    <p>Highscores:</p>
+                    <ol id="highscorelist"></ol>
+                    <form id="highscorelog" method="POST">
+                        <label for="highscoreinitial-text">Add your score: </label>
+                        <input type="text" placeholder="Initials" name="userinitials" id="initialsText"/>
+                        <button class="saveHighScores">Save</button>
+                        <button class="clearHighScores">Clear</button>
+                        <button class="playAgain">Play Again</button>
+                    </form> 
+                </div>
             </div>
-
         </div>
-            
+
         <script src="assets/sprintscript.js"></script>
     </body>
 </html>
