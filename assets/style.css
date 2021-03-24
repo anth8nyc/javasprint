@@ -13,35 +13,35 @@ body {
   padding: 0;
 }
 
-
 header {
   justify-content:space-between;
   display: flex;
   flex-wrap: wrap;
 }
 
-header button.hss {
-  color: crimson;
-  margin-left: 20px;
-  margin-top: 20px;
-  display: flex;
-  padding: 5px;
-  /* border-style: outset; */
-  border-radius: 15px;
-  padding: 5px;
+header button {
   font-size: 16px;
+  padding: 5px;
+  border-radius: 15px;
 }
 
-header button.timer {
-  font-size: 16px;
+header button p {
+  margin: 0 auto;
+}
+
+header button.hss {
+  margin-left: 20px;
+  margin-top: 20px;
+  color: crimson;
+  display: flex;
+}
+
+header button.time {
   margin-top: 20px;
   margin-right: 20px;
   background-color: crimson;
   color: white;
   display: none;
-  border-radius: 15px;
-  padding: 5px;
-  /* border-style: outset; */
 }
 
 h1, h2 {
@@ -67,21 +67,15 @@ h1, h2 {
   padding: 10px;
 }
 
-.answerBtn {
-  /* float: left; */
+.answerBtnCon {
   width: 50%;
-  /* height: 40px; */
-  /* min-height: 60px; */
   margin: auto;
-  /* cursor: pointer; */
-  /* object-fit: cover; */
   border-radius: 8px;
   transition: 0.3s;
   justify-content: space-around;
-  /* display: none; */
 }
 
-.answerBtn button {
+.answerBtnCon button {
   margin: 10px;
   justify-content: space-around;
   border-radius: 15px;
@@ -90,34 +84,46 @@ h1, h2 {
   padding: 10px;
   min-height: 70px;
   min-width: 100%;
-  
 }
 
-#startBtn {
+.startBtn {
   display: flex;
   /* float: left; */
   width: fit-content;
   height: fit-content;
   margin: 10% auto;
-  /* cursor: pointer; */
-  /* object-fit: cover; */
-  border-radius: 15px;
-  /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 1); */
   transition: 0.3s;
-  /* align-content: center; */
   color: white;
   background-color: crimson;
+  border-radius: 15px;
 }
 
-#startBtn p {
+.startBtn p {
   margin: auto;
   font-size: xx-large;
 }
 
+button {
+  border-color: var(--accent);
+  border-style: solid;
+}
+
 button:hover {
-  opacity: .65;
+  opacity: .75;
   border-style: solid;
   border-radius: 45px;
-  border-color: black;
+  border-color: darkred;
   cursor: pointer;
+}
+
+button:focus {
+  outline-style: none;
+  /* box-shadow: 0 0 8px 4px pink; */
+  border-style: solid;
+  border-color: darkred;
+}
+
+header button:focus{
+  border-radius: 45px;
+  transform: scale(1.2);
 }
