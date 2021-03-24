@@ -10,7 +10,7 @@ let mainEl = document.querySelector(".main");
 let questContainEl = document.querySelector(".questContain")
 let questEl = document.querySelector(".question")
 
-let answerBtnsEl = document.querySelectorAll(".answerBtn")
+let answerBtnsEl = document.getElementsByClassName("answerBtn")
 let answerBtnAEl = document.querySelector("#answerchoicea")
 let answerBtnBEl = document.querySelector("#answerchoiceb")
 let answerBtnCEl = document.querySelector("#answerchoicec")
@@ -46,6 +46,22 @@ let questions = [
       { text: "Pizza", correct: true},
       { text: "Burgers", correct: false},
     ]},
+  {
+    question: "What's my favorite animal?", 
+    answers:[
+      { text: "Lion", correct: false},
+      { text: "Eagle", correct: false},
+      { text: "Snake", correct: false},
+      { text: "Fox", correct: true},
+    ]},
+  {
+    question: "What's my favorite TV show?", 
+    answers:[
+      { text: "Game Of Thrones", correct: false},
+      { text: "Midnight Gospel", correct: true},
+      { text: "Black Mirror", correct: false},
+      { text: "Bob's Burgers", correct: false},
+    ]},
   
 ]
 
@@ -54,16 +70,24 @@ startBtnEl.addEventListener("click", function(){
   clearInterval(setTime);
   setTime();
   removeStartBtn();
-  renderQuestions();
-    
+  startGame();
+  
 });
+
+function startGame() {
+
+  questContainEl.setAttribute("style", "display: flex");
+  
+  renderQuestions();
+     
+}
+
 
 function setTime() {
   timeBtnEl.setAttribute("style", "display: flex")
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timerEl.textContent = secondsLeft + " seconds left";
-    
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
       endGame();
@@ -77,44 +101,80 @@ function removeStartBtn() {
 
 function renderQuestions(){
   
-  questContainEl.setAttribute("style", "display: flex");
-  
   questEl.textContent = questions[currentQuest].question
-  
   answerBtnAEl.textContent = questions[currentQuest].answers[0].text
   answerBtnBEl.textContent = questions[currentQuest].answers[1].text
   answerBtnCEl.textContent = questions[currentQuest].answers[2].text
   answerBtnDEl.textContent = questions[currentQuest].answers[3].text
-  
-  
-  for (let currentQuest = 0; currentQuest < questions.length; currentQuest++) {
-    
-    answerBtnsEl.addEventListener("click", function(){
-    
-      let chosenQ = questions[currentQuest];
-      let chosenA = answerBtnsEl.currentTarget
-      console.log(chosenA)
 
-      if (this.correct === true) {
-        score++;
-        currentQuest++;
-      } else {
-        secondsLeft - 10;
-        currentQuest++;
-      }
-      
-    });
-      
+  for (let i = 0; i < answerBtnsEl.length; i++) {
+    
+    let ac = questions[currentQuest].answers[i].correct;
+    
+    if(ac === true){
+      answerBtnsEl[i].classList.add("correct")
+    }
+    
   }
+  
+  for (let i = 0; i < answerBtnsEl.length; i++) {
     
-  // for (let index = 0; index < array.length; index++) {
-    //   const element = array[index];
+    answerBtnsEl[i].addEventListener("click", function(chose){
+      let chosenA = chose.target;
+      checkValidity(chosenA);
+      
+    })    
     
-    // }
+  }
+  
+  currentQuest++;
+  renderQuestions;
+};
+
+
+function checkValidity(chosenA){
+  
+  chosenA
+  if (chosenA.classList.contains("correct")){
+    addScore();
+  } else {
+    subTime();
+  };
+  resetQA();
+  renderQuestions();
+  
+  console.log(chosenA);
+  console.log(score)
+};
+
+function resetQA() {
+  
+  for (let i = 0; i < answerBtnsEl.length; i++) {
     
-    // For loop //
-    // on click, check correct t/f 
-    //if else 
+    answerBtnsEl[i].classList.remove("correct")    
+    
+  }
+}
+
+function sTime() {
+  
+  secondsLeft--;
+}
+
+function addScore() {
+  score++;
+}
+function subTime() {
+  secondsLeft - 10;
+}
+// for (let index = 0; index < array.length; index++) {
+  //   const element = array[index];
+  
+  // }
+  
+  // For loop //
+  // on click, check correct t/f 
+  //if else 
     // either renders next question
     // if correct add to score
     // else subtract time
@@ -123,8 +183,6 @@ function renderQuestions(){
     // renderQuestions();  
 
   
-}
-
 
 function endGame() {
 
