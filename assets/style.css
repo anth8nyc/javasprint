@@ -66,6 +66,15 @@ h1, h2 {
   border-style: none;
   padding: 10px;
 }
+.endScreen {
+  max-width: 86%;
+  margin: 5% auto;
+  display: none;
+  box-shadow: 0 4px 8px 0 crimson;
+  border-radius: 15px;
+  border-style: none;
+  padding: 10px;
+}
 
 .answerBtnCon {
   width: 50%;
