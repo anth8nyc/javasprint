@@ -1,4 +1,4 @@
-# JavaSpring
+# JavaSprint
 ![Preview](./assets/javasprint.png)
 
 
